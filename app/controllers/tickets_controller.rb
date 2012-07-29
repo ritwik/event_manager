@@ -3,5 +3,6 @@ class TicketsController < ApplicationController
   end
   
   def new
+    @ticket = Ticket.new
   end
 end

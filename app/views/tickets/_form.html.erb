@@ -1,0 +1,43 @@
+<%= form_for @ticket, :url => root_path, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :dietary_req, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :dietary_req, :class => 'text_area', :rows => 4 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :arc, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :arc, :class => 'check_box' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :table_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :table_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :payment_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :payment_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :price_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :price_id, :class => 'number_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to 'Cancel', root_path, :class => 'btn' %>
+  </div>
+<% end %>
