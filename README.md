@@ -1,0 +1,3 @@
+# Event Manager
+
+Manage events.
