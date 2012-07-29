@@ -3,7 +3,6 @@ class CreateTickets < ActiveRecord::Migration
     create_table :tickets do |t|
       t.string :name
       t.text :dietary_req
-      t.boolean :arc
       t.integer :table_id
       t.integer :payment_id
       t.integer :price_id

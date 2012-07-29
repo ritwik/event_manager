@@ -6,33 +6,23 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dietary_req, :class => 'control-label' %>
+    <%= f.label 'Dieatary Requirements', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_area :dietary_req, :class => 'text_area', :rows => 4 %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :arc, :class => 'control-label' %>
+    <%= f.label 'Ticket Type', :class => 'control-label' %>
     <div class="controls">
-      <%= f.check_box :arc, :class => 'check_box' %>
+      <%= f.select :price_id, Price.all.map {|x| [x.name, x.id]} %>
     </div>
   </div>
+  
+  <h3>Optional</h3>
   <div class="control-group">
-    <%= f.label :table_id, :class => 'control-label' %>
+    <%= f.label 'Table Name', :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :table_id, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :payment_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :payment_id, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :price_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :price_id, :class => 'number_field' %>
+      <%= f.text_field :table_id, :class => 'text_field' %>
     </div>
   </div>
 
