@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Price.create([{type: 'Arc', price: 6600}, {type: 'Non Arc', price: 7600}])
