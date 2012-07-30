@@ -2,6 +2,9 @@ EventManager::Application.routes.draw do
   root :to => 'payments#index'
   
   match '/book' => 'payments#new', :as => :new_ticket
+  get 'payments/confirm'
+  post 'payments/complete'
+  
   resources :payments do
     post 'create'
   end

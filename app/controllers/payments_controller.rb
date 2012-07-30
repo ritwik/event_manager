@@ -36,5 +36,47 @@ class PaymentsController < ApplicationController
   # TODO: before filter and protect with session
   def show
     @payment = Payment.find(params[:id])
+    @paypal_token = GATEWAY.setup_purchase(@payment.price,
+      :ip                => request.remote_ip,
+      :return_url        => payments_confirm_url,
+      :cancel_return_url => payment_url(@payment)
+    )
+    
+    @payment.token = @paypal_token.token
+    @payment.save
+    
+  end
+  
+  # Confirm the transaction, paypal's callback
+  def confirm
+    redirect_to :action => 'index' unless params[:token]
+    @payment = Payment.where(:token => params[:token]).first
+    details_response = GATEWAY.details_for(params[:token])
+    
+    if !details_response.success?
+      @message = details_response.message
+      render :action => 'error'
+      return
+    end
+  end
+  
+  # Complete the transaction
+  def complete
+    redirect_to :action => 'index' unless params[:token]
+    @payment = Payment.where(:token => params[:token]).first
+    purchase = GATEWAY.purchase(@payment.price,
+      :ip       => request.remote_ip,
+      :payer_id => params[:payer_id],
+      :token    => params[:token]
+    )
+    
+    if !purchase.success?
+      @message = purchase.message
+      render :action => 'error'
+      return
+    else
+      @payment.paid = @payment.price
+      @payment.save
+    end
   end
 end

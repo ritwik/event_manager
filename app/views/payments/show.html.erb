@@ -31,7 +31,7 @@
 </table>
 
 <p>
-  <%= link_to "Pay via PayPal", root_path, :class => 'btn btn-large btn-primary' %>
+  <%= link_to "Pay via PayPal", GATEWAY.redirect_url_for(@paypal_token.token), :class => 'btn btn-large btn-primary' %>
   <%= link_to "Pay via Direct Debit", root_path, :class => 'btn btn-large btn-primary' %>
   <%= link_to "Cancel", root_path, :class => 'btn btn-large btn-danger' %>
 </p>

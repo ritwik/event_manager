@@ -1,5 +1,5 @@
 class Payment < ActiveRecord::Base
-  attr_accessible :email, :paid, :price, :table_code
+  attr_accessible :email, :table_code
   attr_reader :table_code # TODO: delegate to tickets
   
   has_many :tickets

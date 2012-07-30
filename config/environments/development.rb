@@ -34,4 +34,15 @@ EventManager::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  # Active Merchant
+  ActiveMerchant::Billing::Base.mode = :test
+  begin
+  ::GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(
+    :login => ENV["PAYPAL_LOGIN"],
+    :password => ENV["PAYPAL_PASSWORD"],
+    :signature => ENV["PAYPAL_SIG"])
+  rescue ArgumentError => ex
+    # Ignore this error
+  end
 end
