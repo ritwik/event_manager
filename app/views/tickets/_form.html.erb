@@ -1,22 +1,33 @@
 <%= form_for @ticket, :url => root_path, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
+
+  <script id="ticket_template" type="text/template">
+  <div id="ticket_{{count}}">
+  <h3>Ticket {{ count }}:</h3>
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field' %>
+      </div>
     </div>
-  </div>
-  <div class="control-group">
-    <%= f.label 'Dieatary Requirements', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :dietary_req, :class => 'text_area', :rows => 4 %>
+    <div class="control-group">
+      <%= f.label 'Dieatary Requirements', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :dietary_req, :class => 'text_area', :rows => 2 %>
+      </div>
     </div>
-  </div>
-  <div class="control-group">
-    <%= f.label 'Ticket Type', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :price_id, Price.all.map {|x| [x.name, x.id]} %>
+    <div class="control-group">
+      <%= f.label 'Ticket Type', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :price_id, Price.all.map {|x| [x.name, x.id]} %>
+      </div>
     </div>
+    <hr>
   </div>
+  </script>
+  
+  <div id="ticket_bottom"></div>
+  
+  <p><%= link_to_function '<i class="icon-plus"></i> Add Additional Ticket'.html_safe, "add_ticket()", :class => 'btn btn-success' %></p>
   
   <h3>Optional</h3>
   <div class="control-group">
