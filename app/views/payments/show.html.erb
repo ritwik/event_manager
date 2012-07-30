@@ -2,20 +2,33 @@
   <h1>Payment</h1>
 </div>
 
-<h2>Tickets</h2>
-
-<ul>
-  <% @payment.tickets.each do |ticket| %>
-    <li>
-      <strong><%= ticket.name %></strong>'s Ticket (<%= ticket.price.name %>) <em><%= number_to_currency(ticket.price.price / 100) %></em>
-    </li>
-  <% end %>
-</ul>
-
-<h2>Total Price</h2>
-<p>
-  <strong><%= number_to_currency(@payment.price / 100) %></strong>
-</p>
+<table class="table table-striped" style="font-size: 1.3em">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @payment.tickets.each do |ticket| %>
+      <tr>
+        <td><strong><%= ticket.name %></strong></td>
+        <td><%= ticket.price.name %></td>
+        <td><em><%= number_to_currency(ticket.price.price / 100) %></em></td>
+      </tr>
+    <% end %>
+    
+    <tr>
+      <td colspan="2">
+        Total Price
+      </td>
+      <td>
+        <strong><%= number_to_currency(@payment.price / 100) %></strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <p>
   <%= link_to "Pay via PayPal", root_path, :class => 'btn btn-large btn-primary' %>

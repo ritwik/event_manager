@@ -6,13 +6,14 @@
 
   <% @payment.tickets.each_with_index do |ticket, i| %>
     <% i += 1 %>
-    <hr>
     <div id="ticket_<%= i %>">
+      <hr>
       <h3>Ticket <%= i %></h3>
       <%= fields_for "tickets[#{i}]", ticket do |f| %>
         <%= render :template => 'payments/_tickets', :locals => {:f => f} %>
       <% end %>
     </div>
+    
   <% end %>
   
   <script type="text/javascript">
@@ -20,8 +21,8 @@
   </script>
   
   <script id="ticket_template" type="text/template">
-    <hr>
     <div id="ticket_{{count}}">
+      <hr>
       <h3>Ticket {{ count }}:</h3>
       <%= fields_for "tickets[{{count}}]" do |f| %>
         <%= render :template => 'payments/_tickets', :locals => {:f => f} %>
@@ -31,9 +32,10 @@
   
   <div id="ticket_bottom"></div>
   
-  <% if @payment.tickets.size < 10 %>
-    <p><%= link_to_function '<i class="icon-plus"></i> Add Additional Ticket'.html_safe, "add_ticket()", :class => 'btn btn-success', :id => 'ticket_more' %></p>
-  <% end %>
+  <p>
+    <%= link_to_function '<i class="icon-plus"></i> Add Additional Ticket'.html_safe, "add_ticket()", :class => 'btn btn-success', :id => 'ticket_more' %>
+    <%= link_to_function '<i class="icon-trash"></i> Remove Last Ticket'.html_safe, "remove_ticket()", :class => 'btn btn-danger', :id => 'ticket_delete' %>
+  </p>
   
   <hr>
   

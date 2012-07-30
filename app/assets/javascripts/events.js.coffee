@@ -3,7 +3,31 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 window.add_ticket = ->
+  if window.ticket_count == 10
+    return
+
   window.ticket_count += 1
-  $('#ticket_bottom').append(Mustache.render($('#ticket_template').html(), {count: ticket_count}))
+  $('#ticket_bottom').append(Mustache.render($('#ticket_template').html(), {count: window.ticket_count}))
+  
+  if window.ticket_count > 1
+    $('#ticket_delete').show()
   if window.ticket_count == 10
     $('#ticket_more').hide()
+
+window.remove_ticket = ->
+  if window.ticket_count == 1
+    return
+
+  $("#ticket_#{window.ticket_count}").remove()
+  window.ticket_count -= 1
+  
+  if window.ticket_count == 1
+    $('#ticket_delete').hide()
+  if window.ticket_count < 10
+    $('#ticket_more').show()
+
+jQuery ->
+  if window.ticket_count == 10
+    $('#ticket_more').hide()  
+  if window.ticket_count == 1
+    $('#ticket_delete').hide()

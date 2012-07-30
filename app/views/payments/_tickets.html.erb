@@ -13,6 +13,6 @@
 <div class="control-group">
   <%= f.label 'Ticket Type', :class => 'control-label' %>
   <div class="controls">
-    <%= f.select :price_id, Price.all.map {|x| [x.name, x.id]} %>
+    <%= f.select :price_id, Price.all.map {|x| [price_name(x), x.id]} %>
   </div>
 </div>
