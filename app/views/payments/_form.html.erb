@@ -1,5 +1,18 @@
 <% if @payment.errors.any? %>
-  <%= @payment.errors.inspect %>
+  <div class="alert alert-error alert-block">
+    <h4 class="alert-heading">Could not book tickets because:</h4>
+    <p>
+      <ul>
+        <% if @payment.errors[:tickets] %>
+          <li>One of the tickets is missing a <strong>Name</strong></li>
+        <% end %>
+        
+        <% filter_errors(@payment.errors).each do |m| %>
+          <li><%= m %></li>
+        <% end %>
+      </ul>
+    </p>
+  </div>
 <% end %>
 
 <%= form_for @payment, :html => { :class => 'form-horizontal' } do |f| %>
@@ -13,7 +26,6 @@
         <%= render :template => 'payments/_tickets', :locals => {:f => f} %>
       <% end %>
     </div>
-    
   <% end %>
   
   <script type="text/javascript">
@@ -54,7 +66,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit 'Book Tickets', :class => 'btn btn-primary' %>
     <%= link_to 'Cancel', root_path, :class => 'btn' %>
   </div>
 <% end %>
