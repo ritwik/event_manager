@@ -1,7 +1,10 @@
 EventManager::Application.routes.draw do
-  root :to => 'tickets#index'
+  root :to => 'payments#index'
   
-  match '/book' => 'tickets#new', :as => :new_ticket
+  match '/book' => 'payments#new', :as => :new_ticket
+  resources :payments do
+    post 'create'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

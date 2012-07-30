@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h1>Payment</h1>
+</div>
+
+<h2>Tickets</h2>
+
+<ul>
+  <% @payment.tickets.each do |ticket| %>
+    <li>
+      <strong><%= ticket.name %></strong>'s Ticket (<%= ticket.price.name %>) <em><%= number_to_currency(ticket.price.price / 100) %></em>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Total Price</h2>
+<p>
+  <strong><%= number_to_currency(@payment.price / 100) %></strong>
+</p>
+
+<p>
+  <%= link_to "Pay via PayPal", root_path, :class => 'btn btn-large btn-primary' %>
+  <%= link_to "Pay via Direct Debit", root_path, :class => 'btn btn-large btn-primary' %>
+  <%= link_to "Cancel", root_path, :class => 'btn btn-large btn-danger' %>
+</p>
+
+<hr>
