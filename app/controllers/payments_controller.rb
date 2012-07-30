@@ -5,7 +5,14 @@ class PaymentsController < ApplicationController
   
   def new
     @payment = Payment.new
-    @payment.tickets = [Ticket.new]
+    if params[:seats]
+      if params[:seats].to_i > 10
+        params[:seats] = 10
+      end
+      @payment.tickets = params[:seats].to_i.times.to_a.map {Ticket.new}
+    else
+      @payment.tickets = [Ticket.new]
+    end
   end
   
   # This creates a payment for you

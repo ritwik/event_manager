@@ -13,6 +13,7 @@ window.add_ticket = ->
     $('#ticket_delete').show()
   if window.ticket_count == 10
     $('#ticket_more').hide()
+    $('#discount').show()
 
 window.remove_ticket = ->
   if window.ticket_count == 1
@@ -24,10 +25,14 @@ window.remove_ticket = ->
   if window.ticket_count == 1
     $('#ticket_delete').hide()
   if window.ticket_count < 10
+    $('#discount').hide()
     $('#ticket_more').show()
 
 jQuery ->
   if window.ticket_count == 10
-    $('#ticket_more').hide()  
+    $('#ticket_more').hide()
+  else
+    $('#discount').hide()
+  
   if window.ticket_count == 1
     $('#ticket_delete').hide()

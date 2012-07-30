@@ -18,5 +18,11 @@ class Payment < ActiveRecord::Base
     self.price = tickets.inject(0) do |sum, ticket|
       sum += ticket.price.price
     end
+    
+    # Apply 10 seat discount
+    # TODO: validate tickets size is in 1..10
+    if tickets.size == 10
+      self.price -= 6000
+    end
   end
 end
