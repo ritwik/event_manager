@@ -46,9 +46,8 @@ class PaymentsController < ApplicationController
         :ip                => request.remote_ip,
         :return_url        => payments_confirm_url,
         :cancel_return_url => payment_url(@payment),
-        :items => [{:name => "Tickets", :quantity => @payment.tickets.size,
-                    :description => "Tickets for cats", :amount => @payment.price}],
-        :currency => "AUD"
+        :items             => [{:name => "Tickets", :amount => @payment.price}],
+        :currency          => "AUD"
         
       )
       
