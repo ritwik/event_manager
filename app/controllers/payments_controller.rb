@@ -48,7 +48,6 @@ class PaymentsController < ApplicationController
         :cancel_return_url => payment_url(@payment),
         :items             => [{:name => "Tickets", :amount => @payment.price}],
         :currency          => "AUD"
-        
       )
       
       @payment.token = @paypal_token.token
