@@ -1,8 +1,15 @@
 <div class="page-header">
   <h1>Payment</h1>
 </div>
+
 <p>Total Price: <strong><%= number_to_currency(@payment.price / 100) %></strong></p>
+
+<p>Are you sure you want to make this payment?</p>
 
 <%= form_tag :action => 'complete', :token => params[:token], :payer_id => params[:PayerID] do %>
   <%= submit_tag 'Complete Payment' %>
+<% end %>
+
+<%= form_tag :action => 'cancel', :token => params[:token], :payer_id => params[:PayerID] do %>
+  <%= submit_tag 'Cancel Payment', :class => 'btn btn-danger' %>
 <% end %>

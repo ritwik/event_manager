@@ -2,5 +2,10 @@
   <h1>Payment Error</h1>
 </div>
 
-<p>Unfortunately an error occurred: <%= @message %></p>
-<p>Please contact support to resolve this issue.</p>
+<p><%= link_to "Return Home", root_path, :class => 'btn' %></p>
+<hr>
+
+<div style="font-size: 1.3em">
+  <p>Unfortunately an error occurred: <%= @message %></p>
+  <p>Please contact support to resolve this issue.</p>
+</div>

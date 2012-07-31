@@ -11,6 +11,8 @@ Manage events.
 - layout? styles?
 - admin
 - procfile to run thin
+- table code
+- emails
 
 ## License
 

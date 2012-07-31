@@ -1,4 +1,6 @@
 class PaymentsController < ApplicationController
+  before_filter :requires_transaction, :only => [:show]
+  
   def index
     
   end
@@ -24,6 +26,7 @@ class PaymentsController < ApplicationController
     end
     
     if payment.save
+      session[:transaction] = payment.id
       redirect_to payment
     else
       @payment = payment
@@ -33,24 +36,41 @@ class PaymentsController < ApplicationController
   end
   
   # This is where you can choose a payment option
-  # TODO: before filter and protect with session
+  # FILTER: transaction
   def show
     @payment = Payment.find(params[:id])
-    @paypal_token = GATEWAY.setup_purchase(@payment.price,
-      :ip                => request.remote_ip,
-      :return_url        => payments_confirm_url,
-      :cancel_return_url => payment_url(@payment)
-    )
     
-    @payment.token = @paypal_token.token
-    @payment.save
-    
+    if @payment.token.nil?
+      # Only give them a token if they don't have one
+      @paypal_token = GATEWAY.setup_purchase(@payment.price,
+        :ip                => request.remote_ip,
+        :return_url        => payments_confirm_url,
+        :cancel_return_url => payment_url(@payment),
+        :items => [{:name => "Tickets", :quantity => @payment.tickets.size,
+                    :description => "Tickets for cats", :amount => @payment.price}],
+        :currency => "AUD"
+        
+      )
+      
+      @payment.token = @paypal_token.token
+      @payment.save
+      
+    else
+      @paypal_token = GATEWAY.details_for(params[:token])
+      
+      if !@paypal_token.success?
+        @message = @paypal_token.message
+        render :action => 'error'
+        return
+      end
+    end
+        
   end
   
   # Confirm the transaction, paypal's callback
   def confirm
-    redirect_to :action => 'index' unless params[:token]
-    @payment = Payment.where(:token => params[:token]).first
+    check_token
+      
     details_response = GATEWAY.details_for(params[:token])
     
     if !details_response.success?
@@ -62,8 +82,8 @@ class PaymentsController < ApplicationController
   
   # Complete the transaction
   def complete
-    redirect_to :action => 'index' unless params[:token]
-    @payment = Payment.where(:token => params[:token]).first
+    check_token
+    
     purchase = GATEWAY.purchase(@payment.price,
       :ip       => request.remote_ip,
       :payer_id => params[:payer_id],
@@ -77,6 +97,34 @@ class PaymentsController < ApplicationController
     else
       @payment.paid = @payment.price
       @payment.save
+    end
+  end
+  
+  # cancel transaction
+  def cancel
+    # unable to do this :( GATEWAY.void doesn't work like that
+    session[:transaction] = nil
+    redirect_to root_path, :notice => "Payment Cancelled"
+  end
+  
+  private
+  def requires_transaction
+    if params[:id].to_i != session[:transaction]
+      @message = "Invalid session id"
+      render :action => 'error'
+      return
+    end
+  end
+  
+  def check_token
+    redirect_to :action => 'index' unless params[:token]
+    @payment = Payment.where(:token => params[:token]).first
+    
+    # Check session
+    if @payment.id != session[:transaction]
+      @message = "Invalid PayPal token"
+      render :action => 'error'
+      return
     end
   end
 end

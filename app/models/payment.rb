@@ -4,7 +4,8 @@ class Payment < ActiveRecord::Base
   
   has_many :tickets
   
-  validates :email, :presence => true
+  validates :email, :presence => true,
+                    :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
   validates :price, :presence => true
   
   before_validation :set_price
@@ -15,14 +16,17 @@ class Payment < ActiveRecord::Base
   
   private
   def set_price
-    self.price = tickets.inject(0) do |sum, ticket|
-      sum += ticket.price.price
-    end
-    
-    # Apply 10 seat discount
-    # TODO: validate tickets size is in 1..10
-    if tickets.size == 10
-      self.price -= 6000
+    if self.new_record?
+      # Only set this once, if it is unset
+      self.price = tickets.inject(0) do |sum, ticket|
+        sum += ticket.price.price
+      end
+      
+      # Apply 10 seat discount
+      # TODO: validate tickets size is in 1..10
+      if tickets.size == 10
+        self.price -= 6000
+      end
     end
   end
 end
