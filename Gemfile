@@ -27,6 +27,8 @@ end
 
 gem 'jquery-rails'
 
+gem 'thin'
+
 gem 'mustache'
 gem "twitter-bootstrap-rails"
 gem 'activemerchant', :require => 'active_merchant'
