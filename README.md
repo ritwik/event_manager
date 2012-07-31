@@ -7,12 +7,14 @@ Manage events.
 - javascript validation
 - delete event
 - discount
-- javascript for payment flow
+- payment by DD
 - layout? styles?
 - admin
 - procfile to run thin
 - table code
 - emails
+- tests
+- timezones?
 
 ## License
 

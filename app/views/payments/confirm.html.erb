@@ -6,10 +6,12 @@
 
 <p>Are you sure you want to make this payment?</p>
 
-<%= form_tag :action => 'complete', :token => params[:token], :payer_id => params[:PayerID] do %>
-  <%= submit_tag 'Complete Payment' %>
+<%= form_tag({:action => 'complete', :token => params[:token], :payer_id => params[:PayerID]}, {:id => 'send_payment_form'}) do %>
+  <%= submit_tag 'Complete Payment', :id => "send_payment" %>
 <% end %>
 
-<%= form_tag :action => 'cancel', :token => params[:token], :payer_id => params[:PayerID] do %>
+<p id="send_progress" style="display: none">Please wait...</p>
+
+<%= form_tag :action => 'cancel' do %>
   <%= submit_tag 'Cancel Payment', :class => 'btn btn-danger' %>
 <% end %>

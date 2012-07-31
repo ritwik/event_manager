@@ -1,11 +1,12 @@
 EventManager::Application.routes.draw do
+  match '/admin' => "admin#index"
+
   root :to => 'payments#index'
   
   match '/book' => 'payments#new', :as => :new_ticket
   get 'payments/confirm'
   post 'payments/cancel'
   post 'payments/complete'
-  
   
   resources :payments do
     post 'create'

@@ -36,3 +36,7 @@ jQuery ->
   
   if window.ticket_count == 1
     $('#ticket_delete').hide()
+  
+  $('#send_payment_form').submit ->
+    $('#send_payment').hide()
+    $('#send_progress').show()

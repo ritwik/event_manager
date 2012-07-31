@@ -14,6 +14,10 @@ class Payment < ActiveRecord::Base
     @table_code = val
   end
   
+  def fully_paid?
+    self.paid == self.price
+  end
+  
   private
   def set_price
     if self.new_record?

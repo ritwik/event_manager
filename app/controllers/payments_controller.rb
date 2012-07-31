@@ -73,7 +73,7 @@ class PaymentsController < ApplicationController
       
     details_response = GATEWAY.details_for(params[:token])
     
-    if !details_response.success?
+    if !details_response.success? || @payment.fully_paid?
       @message = details_response.message
       render :action => 'error'
       return
@@ -87,7 +87,8 @@ class PaymentsController < ApplicationController
     purchase = GATEWAY.purchase(@payment.price,
       :ip       => request.remote_ip,
       :payer_id => params[:payer_id],
-      :token    => params[:token]
+      :token    => params[:token],
+      :currency => "AUD"
     )
     
     if !purchase.success?
@@ -103,6 +104,8 @@ class PaymentsController < ApplicationController
   # cancel transaction
   def cancel
     # unable to do this :( GATEWAY.void doesn't work like that
+    #   so we set it up with our session logic so it's not
+    #   possible without our private keys
     session[:transaction] = nil
     redirect_to root_path, :notice => "Payment Cancelled"
   end

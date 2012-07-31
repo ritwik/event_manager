@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>Admin</h1>
+</div>
+
+<p>Paid transactions only.</p>
+
+<table class="table table-striped" style="font-size: 1.3em">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Tickets</th>
+      <th>Paid</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @payments.each do |payment| %>
+      <tr>
+        <td><strong><%= payment.email %></strong></td>
+        <td>
+          <% payment.tickets.group_by(&:price).each do |price, tickets| %>
+            [<%= price.name %>: <%= tickets.size %>]
+          <% end %>
+        </td>
+        <td><em><%= number_to_currency(payment.price / 100) %></em></td>
+        <td><%= payment.created_at.to_formatted_s(:short) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
