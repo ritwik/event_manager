@@ -4,9 +4,9 @@ Manage events.
 
 ## TODO
 
+- 10 discount
 - table_codes
 - javascript validation
-- discount
 - payment by DD
 - layout? styles?
 - admin

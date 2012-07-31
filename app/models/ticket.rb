@@ -6,8 +6,9 @@ class Ticket < ActiveRecord::Base
   belongs_to :table
   
   validates :name, :presence => true
+  validates :price_id, :presence => true
+  
   # TODO: 
-#  validates :table_id, :presence => true
-#  validates :price_id, :presence => true
-#  validates :payment, :presence => true
+  # validates :table_id, :presence => true
+  # validates :payment_id, :presence => true
 end
