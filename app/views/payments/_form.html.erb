@@ -54,7 +54,9 @@
   </p>
   
   <hr>
-  
+  <h3>General Information For This Booking</h3>
+  <p>Please enter an email address below to use with this booking. We will use this to identify this booking and contact you if we need to. We'll delete it after the event. We don't like spam either.</p>
+  <p>Also, if you are attending with friends who already have their tickets, ask them for their table code and enter it below to let us know that you'd like to be seated with them. We will try to accomodate these requests as best we can (within the limits of finite table sizes).</p>
   <div class="control-group">
     <%= f.label 'Email', :class => 'control-label' %>
     <div class="controls">
@@ -63,14 +65,17 @@
   </div>
   
   <div class="control-group">
-    <%= f.label 'Table Name (optional)', :class => 'control-label' %>
+
+    <%= f.label 'Table Name (optional).', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :table_code, :class => 'text_field' %>
     </div>
   </div>
 
   <div class="form-actions">
+    
     <%= f.submit 'Book Tickets', :class => 'btn btn-primary' %>
+    
     <%= link_to 'Cancel', root_path, :class => 'btn' %>
   </div>
 <% end %>
