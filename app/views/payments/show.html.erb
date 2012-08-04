@@ -19,6 +19,17 @@
       </tr>
     <% end %>
     
+    <% if @payment.discounted? %>
+      <tr>
+        <td colspan="2">
+          Discount
+        </td>
+        <td>
+          <strong>-<%= number_to_currency(6000 / 100) %></strong>
+        </td>
+      </tr>
+    <% end %>
+    
     <tr>
       <td colspan="2">
         Total Price

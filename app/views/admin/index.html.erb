@@ -2,6 +2,8 @@
   <h1>Admin</h1>
 </div>
 
+<h2>Payments</h2>
+
 <p>Paid transactions only.</p>
 
 <table class="table table-striped" style="font-size: 1.3em">
@@ -10,6 +12,8 @@
       <th>Email</th>
       <th>Tickets</th>
       <th>Paid</th>
+      <th>Bulk Discount?</th>
+      <th>Table Code</th>
       <th>Time</th>
     </tr>
   </thead>
@@ -23,8 +27,45 @@
           <% end %>
         </td>
         <td><em><%= number_to_currency(payment.price / 100) %></em></td>
+        <td><%= payment.discounted? %></td>
+        <td><%= payment.table_code %></td>
         <td><%= payment.created_at.to_formatted_s(:short) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<h2>Tables</h2>
+
+<table class="table table-striped" style="font-size: 1.3em">
+  <thead>
+    <tr>
+      <th>Table Code</th>
+      <th>Name</th>
+      <th>Dietary Requirements</th>
+      <th>Ticket Type</th>
+      <th>Payee</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tables.each do |table| %>
+      <% table.tickets.each do |ticket| %>
+        <tr>
+          <% if table.id %>
+            <td><strong><%= table.id %></strong></td>
+          <% else %>
+            <td><em>None</em></td>
+          <% end %>
+          <td><strong><%= ticket.name %></strong></td>
+          <td><%= ticket.dietary_req %></td>
+          <td><%= ticket.price.name %></td>
+          <td><%= ticket.payment.email %></td>
+          <td><%= ticket.created_at.to_formatted_s(:short) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+
