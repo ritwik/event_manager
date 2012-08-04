@@ -3,6 +3,7 @@ class AdminController < ApplicationController
   
   def index
     @payments = Payment.select(&:fully_paid?)
+    @tables = Table.all
   end
   
   private

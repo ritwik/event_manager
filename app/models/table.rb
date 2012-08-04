@@ -1,10 +1,23 @@
-class Table < ActiveRecord::Base
-  attr_accessible :capacity, :discount
+class Table
+  attr_reader :id, :tickets
   
-  has_many :tickets
+  def initialize(id, tickets)
+    @id = id
+    @tickets = tickets
+  end
   
-  validates :capacity, :presence => true
-  validates :discount, :presence => true
+  # Class methods
+  def self.all
+    Ticket.all.select { |t|
+      t.payment.fully_paid?
+    }.group_by { |t|
+      t.payment.table_code
+    }.map { |id, t|
+      Table.new(id, t)
+    }
+  end
   
-  # TODO: validates capacity is not exceeded
+  def self.find(id)
+    self.all.select {|x| x.id == id}.first
+  end
 end
