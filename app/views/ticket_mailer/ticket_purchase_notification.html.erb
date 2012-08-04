@@ -1,4 +1,4 @@
-Your purchase of <%= @payment.tickets.size %> for the PGC ball was successful! Through paypal we've charged you $<%= @payment.price / 100 %>. This is your receipt / confirmation of purchase.
+Your purchase of <%= @payment.tickets.size %> for the PGC ball was successful! Through paypal we've charged you AUD$<%= @payment.price / 100 %>. This is your receipt / confirmation of purchase.
 
 For quick reference, here is information about the ball:
 Date/Time: August 5, 2012
@@ -17,3 +17,11 @@ Thanks, and looking forward to seeing you there!
 ==============
 
 For your records, you have the following details on your ticket. Feel free to send us an email on <%= @info_email %> with any questions or to add/change information on these tickets.
+
+======================================
+Name - Ticket Type - Dietary Preferences
+--------------------------------------
+<% @payment.tickets.each do |ticket| %>
+  <%= ticket.name %> - <%= ticket.price.name %> (AUD $<%=ticket.price.price/100%>) - <%= ticket.dietary_req %>
+  ---------------------------------------
+<% end %>
