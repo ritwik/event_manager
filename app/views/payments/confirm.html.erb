@@ -7,7 +7,7 @@
 <p>Are you sure you want to make this payment?</p>
 
 <%= form_tag({:action => 'complete', :token => params[:token], :payer_id => params[:PayerID]}, {:id => 'send_payment_form'}) do %>
-  <%= submit_tag 'Complete Payment', :id => "send_payment" %>
+  <%= submit_tag 'Complete Payment', :id => "send_payment", :class => 'btn btn-primary' %>
 <% end %>
 
 <p id="send_progress" style="display: none">Please wait...</p>
