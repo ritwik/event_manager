@@ -26,6 +26,9 @@ class PaymentsController < ApplicationController
     end
     
     if payment.save
+      payment.set_table_code
+      payment.save
+      
       session[:transaction] = payment.id
       redirect_to payment
     else
