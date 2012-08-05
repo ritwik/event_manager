@@ -96,7 +96,6 @@ class PaymentsController < ApplicationController
     else
       @payment.paid = @payment.price
       @payment.save
-      TicketMailer.ticket_purchase_notification(@payment).deliver
     end
   end
   
