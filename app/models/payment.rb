@@ -19,6 +19,13 @@ class Payment < ActiveRecord::Base
     tickets.size == 10
   end
   
+  def set_table_code
+    # Set the table_code if not given
+    if self.table_code.nil? || self.table_code.blank?
+      self.table_code = "TABLE#{id}"
+    end
+  end
+  
   private
   def set_price
     if self.new_record?
@@ -34,4 +41,5 @@ class Payment < ActiveRecord::Base
       end
     end
   end
+  
 end
