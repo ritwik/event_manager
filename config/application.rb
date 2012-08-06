@@ -58,5 +58,9 @@ module EventManager
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Heroku fix to prevent access to db while precompiling assets
+    # Found here: http://guides.rubyonrails.org/asset_pipeline.html in Section 4.1
+    config.assets.initialize_on_precompile = false
   end
 end
