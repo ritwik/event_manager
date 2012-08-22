@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 window.add_ticket = ->
-  if window.ticket_count == 10
+  if window.ticket_count == 8
     return
 
   window.ticket_count += 1
@@ -11,7 +11,7 @@ window.add_ticket = ->
   
   if window.ticket_count > 1
     $('#ticket_delete').show()
-  if window.ticket_count == 10
+  if window.ticket_count == 8
     $('#ticket_more').hide()
     $('#discount').show()
 
@@ -24,12 +24,12 @@ window.remove_ticket = ->
   
   if window.ticket_count == 1
     $('#ticket_delete').hide()
-  if window.ticket_count < 10
+  if window.ticket_count < 8
     $('#discount').hide()
     $('#ticket_more').show()
 
 jQuery ->
-  if window.ticket_count == 10
+  if window.ticket_count == 8
     $('#ticket_more').hide()
   else
     $('#discount').hide()

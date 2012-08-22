@@ -8,8 +8,8 @@ class PaymentsController < ApplicationController
   def new
     @payment = Payment.new
     if params[:seats]
-      if params[:seats].to_i > 10
-        params[:seats] = 10
+      if params[:seats].to_i > 8
+        params[:seats] = 8
       end
       @payment.tickets = params[:seats].to_i.times.to_a.map {Ticket.new}
     else
