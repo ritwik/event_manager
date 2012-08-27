@@ -3,11 +3,12 @@
     <h4 class="alert-heading">Could not book tickets because:</h4>
     <p>
       <ul>
-        <% if @payment.errors[:tickets] %>
-          <li>One of the tickets is missing a <strong>Name</strong></li>
+        <% @payment.tickets.each do |ticket| %>
+          <% ticket.errors.full_messages.each do |e| %>
+            <li><%= e %></li>
+          <% end %>
         <% end %>
-        
-        <% filter_errors(@payment.errors).each do |m| %>
+        <% @payment.errors.full_messages.each do |m| %>
           <li><%= m %></li>
         <% end %>
       </ul>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120804104849) do
+ActiveRecord::Schema.define(:version => 20120827132112) do
 
   create_table "payments", :force => true do |t|
     t.integer  "price"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(:version => 20120804104849) do
     t.integer  "price_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "student_id"
+    t.string   "faculty"
   end
 
 end

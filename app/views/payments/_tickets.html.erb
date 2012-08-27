@@ -5,9 +5,21 @@
   </div>
 </div>
 <div class="control-group">
-  <%= f.label 'Dieatary Requirements', :class => 'control-label' %>
+  <%= f.label 'Dietary Requirements', :class => 'control-label' %>
   <div class="controls">
     <%= f.text_area :dietary_req, :class => 'text_area', :rows => 2 %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :student_id, :class => 'control-label' %>
+  <div class="controls">
+    <%= f.text_field :student_id, :class => 'text_field'%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :faculty, :class => 'control-label' %>
+  <div class="controls">
+    <%= f.text_field :faculty, :class => 'text_field' %>
   </div>
 </div>
 <div class="control-group">
