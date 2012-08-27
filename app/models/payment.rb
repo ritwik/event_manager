@@ -37,7 +37,7 @@ class Payment < ActiveRecord::Base
       # Apply 8 seat discount
       # TODO: validate tickets size is in 1..8
       if self.discounted?
-        self.price -= 6000
+        self.price -= 4800
       end
     end
   end
