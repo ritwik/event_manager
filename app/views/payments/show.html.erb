@@ -44,7 +44,7 @@
 <p>
   <form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post">
     <input type="hidden" name="cmd" value="_xclick">
-    <input type="hidden" name="business" value="pgc.paypal@arc.unsw.edu.au">
+    <input type="hidden" name="business" value="<%= ENV["PAYPAL_EMAIL"] %>">
     <input type="hidden" name="lc" value="AU">
     <input type="hidden" name="currency_code" value="AUD">
     <input type="hidden" name="item_name" value="PGC Ball Tickets (order number <%= @payment.id %>)">
