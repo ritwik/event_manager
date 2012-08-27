@@ -3,3 +3,14 @@
 
 en:
   hello: "Hello world"
+  activerecord: 
+    attributes:
+      ticket:
+        student_id: "Student ID"
+    errors:
+      models:
+        ticket:
+          attributes:
+            student_id:
+              blank: "must be supplied"
+
