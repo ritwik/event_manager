@@ -8,6 +8,7 @@
             <li><%= e %></li>
           <% end %>
         <% end %>
+
         <% @payment.errors.full_messages.each do |m| %>
           <li><%= m %></li>
         <% end %>
@@ -51,7 +52,7 @@
   </p>
   
   <p id="discount" class="alert alert-success" style="font-size: 1.2em">
-    Booking 8 tickets together gives a <span style="color: red"><strong>$60</strong></span> discount.
+    Booking 8 tickets together gives a <span style="color: red"><strong>$48</strong></span> discount.
   </p>
   
   <hr>
