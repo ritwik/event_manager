@@ -58,7 +58,25 @@ class PaymentsController < ApplicationController
   end
 
   def ipn
-    raise params.insp
+    # Get the request
+    # Replay it to paypal
+    # Get the result of that request
+    query_string = request.env["QUERY_STRING"]
+    #response = Faraday.post(env["PAYPAL_BUYNOW_SITE"] + "?" + query_string)
+
+    conn = Faraday.new(:url => env["PAYPAL_BUYNOW_SITE"]) do |faraday|
+     faraday.request  :url_encoded             # form-encode POST params
+     faraday.response :logger                  # log requests to STDOUT
+     faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+    end
+
+    conn.post do |req|
+     req.url '/'
+     req.headers['Content-Type'] = 'application/html'
+     req.body = query_string
+    end
+
+    raise conn.inspect
   end
   
   # cancel transaction
