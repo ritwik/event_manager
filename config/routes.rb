@@ -8,7 +8,7 @@ EventManager::Application.routes.draw do
   post 'payments/thankyou'
   post 'payments/cancel'
   get 'payments/ipn'
-  post 'payments/thankyou'
+  post 'payments/ipn'
   
   resources :payments do
     post 'create'
