@@ -18,7 +18,7 @@
 <% end %>
 
 <%= form_for @payment, :html => { :class => 'form-horizontal' } do |f| %>
-
+  <p>Items with a * are required, but for dietary requirements, student ID, and faculty, you can set the value to 'none' or 'n/a'.</p>
   <% @payment.tickets.each_with_index do |ticket, i| %>
     <% i += 1 %>
     <div id="ticket_<%= i %>">
