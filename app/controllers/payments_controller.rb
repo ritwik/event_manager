@@ -41,66 +41,24 @@ class PaymentsController < ApplicationController
   # This is where you can choose a payment option
   # FILTER: transaction
   def show
-    @payment = Payment.find(params[:id])
-    
-    if @payment.token.nil?
-      # Only give them a token if they don't have one
-      @paypal_token = GATEWAY.setup_purchase(@payment.price,
-        :ip                => request.remote_ip,
-        :return_url        => payments_confirm_url,
-        :cancel_return_url => payment_url(@payment),
-        :items             => [{:name => "Tickets", :amount => @payment.price}],
-        :currency          => "AUD"
-      )
-      
-      @payment.token = @paypal_token.token
-      @payment.save
-      
-    else
-      @paypal_token = GATEWAY.details_for(params[:token])
-      
-      if !@paypal_token.success?
-        @message = @paypal_token.message
-        render :action => 'error'
-        return
-      end
-    end
-        
+    @payment = Payment.find(params[:id])     
   end
   
-  # Confirm the transaction, paypal's callback
-  def confirm
-    check_token
-      
-    details_response = GATEWAY.details_for(params[:token])
-    
-    if !details_response.success? || @payment.fully_paid?
-      @message = details_response.message
-      render :action => 'error'
-      return
-    end
-  end
   
-  # Complete the transaction
-  def complete
-    check_token
-    
-    purchase = GATEWAY.purchase(@payment.price,
-      :ip       => request.remote_ip,
-      :payer_id => params[:payer_id],
-      :token    => params[:token],
-      :currency => "AUD"
-    )
-    
-    if !purchase.success?
-      @message = purchase.message
-      render :action => 'error'
-      return
-    else
-      @payment.paid = @payment.price
-      @payment.save
-      TicketMailer.ticket_purchase_notification(@payment).deliver
-    end
+  def thankyou
+    # raise params.inspect
+    # @payment = Payments.find(params[:item_number])
+    # if @payment
+    #   @payment.paid = @payment.price
+    #   @payment.save
+    #   TicketMailer.ticket_purchase_notification(@payment).deliver
+    # else
+
+    # end
+  end
+
+  def ipn
+    raise params.insp
   end
   
   # cancel transaction
