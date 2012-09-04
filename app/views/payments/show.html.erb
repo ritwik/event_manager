@@ -52,7 +52,6 @@
     <input type="hidden" name="amount" value="<%= @payment.price/100 %>">
     <input type="hidden" name="button_subtype" value="services">
     <input type="hidden" name="return" value="<%= payments_thankyou_url %>">
-    <input type="hidden" name="notify_url" value="<%= payments_ipn_url %>">
     <input type="hidden" name="bn" value="PP-BuyNowBF:btn_paynowCC_LG.gif:NonHostedGuest">
     <input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online." class="paypal-buynow-button">
     <img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
