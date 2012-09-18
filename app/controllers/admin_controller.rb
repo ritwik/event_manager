@@ -8,9 +8,19 @@ class AdminController < ApplicationController
 
   def mark_paid
     @payment = Payment.find(params[:payment_id])
-    @payment.paid = @payment.price
-    @payment.save!
-    redirect_to admin_path, :notice => "Payment #{@payment.id} has been paid."
+    
+
+    if @payment
+    #   @payment.paid = @payment.price
+    #   @payment.save
+    #   TicketMailer.ticket_purchase_notification(@payment).deliver
+      @payment.paid = @payment.price
+      @payment.save!
+      TicketMailer.ticket_purchase_notification(@payment).deliver
+      redirect_to admin_path, :notice => "Payment #{@payment.id} has been paid."
+    else
+      redirect_to admin_path, :notice => "Couldn't find that payment :("
+    end
   end
   
   private
