@@ -16,6 +16,7 @@
       <th>Bulk Discount?</th>
       <th>Table Code</th>
       <th>Created</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -32,6 +33,11 @@
         <td><%= payment.discounted? %></td>
         <td><%= payment.table_code %></td>
         <td><%= payment.created_at.to_formatted_s(:short) %></td>
+        <td>
+          <%= link_to_unless payment.paid?, "Has Paid", admin_mark_paid_path(:payment_id=>payment.id), :method => :post do %>
+            Paid
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

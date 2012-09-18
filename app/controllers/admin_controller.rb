@@ -5,6 +5,13 @@ class AdminController < ApplicationController
     @payments = Payment.all.reverse
     @tables = Table.all
   end
+
+  def mark_paid
+    @payment = Payment.find(params[:payment_id])
+    @payment.paid = @payment.price
+    @payment.save!
+    redirect_to admin_path, :notice => "Payment #{@payment.id} has been paid."
+  end
   
   private
   def require_admin

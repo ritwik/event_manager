@@ -1,6 +1,7 @@
 EventManager::Application.routes.draw do
   match '/admin' => "admin#index"
-
+  match '/admin/mark_paid' => "admin#mark_paid"
+  
   root :to => 'payments#index'
   
   match '/book' => 'payments#new', :as => :new_ticket

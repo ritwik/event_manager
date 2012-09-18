@@ -72,7 +72,7 @@ class PaymentsController < ApplicationController
 
     conn.post do |req|
      req.url '/'
-     req.headers['Content-Type'] = 'application/html'
+     req.headers['Content-Type'] = request.env["HTTP_ACCEPT"]
      req.body = query_string
     end
 
