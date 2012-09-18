@@ -1,7 +1,7 @@
 class Payment < ActiveRecord::Base
   attr_accessible :email, :table_code
   
-  has_many :tickets
+  has_many :tickets, :dependent => :destroy
   
   validates :email, :presence => true,
                     :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
