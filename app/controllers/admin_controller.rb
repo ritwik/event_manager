@@ -2,7 +2,7 @@ class AdminController < ApplicationController
   before_filter :require_admin
   
   def index
-    @payments = Payment.select(&:fully_paid?)
+    @payments = Payment.all.reverse
     @tables = Table.all
   end
   
@@ -12,5 +12,4 @@ class AdminController < ApplicationController
       username == "admin" && password == ENV["ADMIN_PASS"]
     end
   end
-  
 end
